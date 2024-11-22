@@ -172,7 +172,18 @@ const Footer = () => {
             })}
           </div>
 
-          <div className="text-center">Made with ❤️ CodeHelp © 2023 Studynotion</div>
+          <div className="text-center">
+  Made with ❤️ 
+  <a 
+    href="https://www.linkedin.com/in/deepak-kumar-287917207/" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    style={{ textDecoration: "none", color: "inherit" }}
+  >
+    Deepak Singh
+  </a> 
+  © 2023 Studynotion
+</div>
         </div>
       </div>
     </div>

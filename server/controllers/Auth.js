@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken")
 const otpGenerator = require("otp-generator")
 const mailSender = require("../utils/mailSender")
 const { passwordUpdated } = require("../mail/templates/passwordUpdate")
+const {otpTemplate} = require("../mail/templates/emailVerificationTemplate")
 const Profile = require("../models/Profile")
 require("dotenv").config()
 
@@ -195,7 +196,7 @@ exports.sendotp = async (req, res) => {
         success: false,
         message: `User is Already Registered`,
       })
-    }
+    } 
 
     var otp = otpGenerator.generate(6, {
       upperCaseAlphabets: false,
@@ -214,11 +215,16 @@ exports.sendotp = async (req, res) => {
     const otpPayload = { email, otp }
     const otpBody = await OTP.create(otpPayload)
     console.log("OTP Body", otpBody)
+    // const mailres = await mailSender(email, "OTP for acc verif", otpTemplate(otp) )
+    // console.log(mailres)
     res.status(200).json({
       success: true,
       message: `OTP Sent Successfully`,
       otp,
     })
+
+    
+
   } catch (error) {
     console.log(error.message)
     return res.status(500).json({ success: false, error: error.message })
